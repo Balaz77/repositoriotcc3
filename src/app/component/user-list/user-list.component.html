@@ -1,0 +1,7 @@
+<!--CONTEÚDO DE DENTRO DA TELA DE ADICIONAR NOVA CONVERSA-->
+<ion-list lines="full" (click)="redirect()" detail="true">
+  <ion-avatar slot="start">
+    <ion-img [src]="item?.photo"></ion-img>
+  </ion-avatar>
+  <ion-label>{{item?.name}}</ion-label>
+</ion-list>

@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <p>CONVERSAS</p>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [value]="segment" mode="md" (ionChange)="onSegmentChange($event)" >
+    <ion-segment-button value="default">
+      <ion-label>Chats</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  <ion-list *ngIf="segment == 'chats' && (chatRooms) as rooms">
+    
+<!--card de usuario-->
+<ion-item *ngFor="let item of rooms" (click)="getChat(item)" [detail]="true">
+  <ion-avatar slot="start">
+    <img [src]="item?.photo"/> 
+  </ion-avatar>
+  <ion-label> {{item?.name}} </ion-label>
+</ion-item>
+
+  </ion-list>
+
+  <!--botão para adicionar uma nova conversa-->
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button (click)="NewChat()">
+      <ion-icon name="add"> </ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--O que aparece quando voce clica para criar uma nova conversa-->
+  <ion-modal #new_chat [isOpen]="open_new_chat" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title> New Chat </ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <!--Conteudo da tela de crair uma nova conversa-->
+      <ion-content color="light" *ngIf="users as user$">
+        <ion-list class ="ion-margin-top" lines="none">
+          <app-user-list *ngFor="let item of user$" [item]="item" (onClick)="startChat($event)">
+
+          </app-user-list>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

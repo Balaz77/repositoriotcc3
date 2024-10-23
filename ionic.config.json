@@ -1,0 +1,7 @@
+{
+  "name": "PAPO-CABECA-APP",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
